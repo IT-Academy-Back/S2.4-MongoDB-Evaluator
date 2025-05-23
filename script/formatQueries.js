@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const inputFile = 'query/queries.js';
-const outputFile = 'query/toExecute.js';
+const inputFile = 'script/query/queries.js';
+const outputFile = 'script/query/toExecute.js';
 
 const input = fs.readFileSync(inputFile, 'utf8');
 const lines = input.split('\n');
@@ -14,7 +14,6 @@ const formatedQueries = lines
   .map(query => {
     queryCount++;
     const clean = query.replace(/;$/, '');
-    if (clean.includes('.forEach')) return clean; 
     return `print('//${queryCount}.');\n${clean}.forEach(doc => print(JSON.stringify(doc)));`;
   });
 
